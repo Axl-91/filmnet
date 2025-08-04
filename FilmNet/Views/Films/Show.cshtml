@@ -1,0 +1,67 @@
+@model FilmNet.Models.Film
+
+@{
+    ViewData["Title"] = "Film Details";
+}
+
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow">
+                <div class="card-header bg-primary text-white">
+                    <h3 class="card-title mb-0">
+                        <i class="fas fa-film me-2"></i>@Model.Name
+                    </h3>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="row mb-4 border">
+                                <h5 class="text-muted mb-2 border">Release Year:</h5>
+                                <p class="fs-4 fw-bold text-primary px-3 border">@Model.Year</p>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-4">
+                                <h5 class="text-muted mb-2">
+                                    <i class="fas fa-tag me-2"></i>Film ID
+                                </h5>
+                                <p class="fs-6 text-secondary">#@Model.Id</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mb-4">
+                        <h5 class="text-muted mb-3">
+                            <i class="fas fa-align-left me-2"></i>Description
+                        </h5>
+                        <div class="bg-light p-3 rounded">
+                            @if (!string.IsNullOrEmpty(Model.Description))
+                            {
+                                <p class="mb-0 lh-lg">@Model.Description</p>
+                            }
+                            else
+                            {
+                                <p class="mb-0 text-muted fst-italic">No description available.</p>
+                            }
+                        </div>
+                    </div>
+
+                    <hr>
+
+                    <div class="d-flex flex-wrap gap-2">
+                        <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary">
+                            <i class="fas fa-edit me-1"></i>Edit Film
+                        </a>
+                        <a asp-action="Index" class="btn btn-outline-secondary">
+                            <i class="fas fa-arrow-left me-1"></i>Back to List
+                        </a>
+                        <a asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-outline-danger">
+                            <i class="fas fa-trash me-1"></i>Delete Film
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

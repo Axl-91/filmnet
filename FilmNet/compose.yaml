@@ -1,9 +1,9 @@
 ﻿services:
   sqlserver:
-    image: mcr.microsoft.com/mssql/server:2022-latest
-    container_name: ${DB_NAME}
+    image: mcr.microsoft.com/mssql/server:2025-latest
+    hostname: filmnet-mssql
     environment:
-      SA_PASSWORD: ${DB_PASSWORD}
+      MSSQL_SA_PASSWORD: ${SA_PASSWORD}
       ACCEPT_EULA: "Y"
       MSSQL_PID: ${MSSQL_PID}
     ports:

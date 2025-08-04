@@ -1,0 +1,30 @@
+@model FilmNet.Models.Film
+
+@{
+    ViewData["Title"] = "Add Film";
+}
+
+<div class="container">
+    
+    <h2>Add Film</h2>
+
+    <form asp-action="Create" method="post">
+        <div>
+            <label asp-for="Name" class="form-label"></label>
+            <input asp-for="Name" class="form-control"/>
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+        <div>
+            <label asp-for="Year" class="form-label"></label>
+            <input asp-for="Year" class="form-control"/>
+            <span asp-validation-for="Year" class="text-danger"></span>
+        </div>
+        <div>
+            <label asp-for="Description" class="form-label"></label>
+            <input asp-for="Description" class="form-control"/>
+            <span asp-validation-for="Description" class="text-danger"></span>
+        </div>
+        <button type="submit" class="btn btn-primary mt-3">Add Film</button>
+    </form>
+
+</div>

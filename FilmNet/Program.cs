@@ -1,6 +1,7 @@
 using DotNetEnv;
 using FilmNet.Data;
 using FilmNet.Data.Service;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -14,11 +15,26 @@ var password = Environment.GetEnvironmentVariable("SA_PASSWORD") ?? "";
 
 var connectionString = $"Server={server};Database={database};User Id=sa;Password={password};TrustServerCertificate=true;";
 
-// Add services to the container.
 builder.Services.AddControllersWithViews();
-builder.Services.AddDbContext<FilmDbContext>(options =>
+builder.Services.AddRazorPages(); 
+builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer(connectionString)
     );
+
+builder.Services.AddDefaultIdentity<IdentityUser>(options =>
+    {
+        options.SignIn.RequireConfirmedAccount = false;
+        options.SignIn.RequireConfirmedEmail = false;
+        options.User.RequireUniqueEmail = false;
+        options.Password.RequireDigit = false;
+        options.Password.RequiredLength = 6;
+        options.Password.RequireNonAlphanumeric = false;
+        options.Password.RequireUppercase = false;
+        options.Password.RequireLowercase = false;
+    })
+    .AddEntityFrameworkStores<AppDbContext>()  // Use your AppDbContext here
+    .AddDefaultTokenProviders();
+
 builder.Services.AddScoped<IFilmsService,  FilmsService>();
 
 var app = builder.Build();
@@ -43,5 +59,6 @@ app.MapControllerRoute(
         pattern: "{controller=Home}/{action=Index}/{id?}")
     .WithStaticAssets();
 
+app.MapRazorPages();
 
 app.Run();

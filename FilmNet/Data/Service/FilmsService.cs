@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace FilmNet.Data.Service;
 
-public class FilmsService(FilmDbContext context) : IFilmsService
+public class FilmsService(AppDbContext context) : IFilmsService
 {
     public async Task<IEnumerable<Film>> GetAllFilmsAsync()
     {
